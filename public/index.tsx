@@ -20,23 +20,23 @@ export function App() {
     const [received, setReceived] = useLocalStorage('received', '');
     const [contentFormat, setContentFormat] = useLocalStorage('contentFormat', 'HTML');
 
-    const formattedExpected = useMemo(() => format(expected, contentFormat), [expected]);
-    const formattedReceived = useMemo(() => {
-        if (!formattedExpected || !received) return null;
-        const formatted = format(received, contentFormat);
-        return diffChars(formattedExpected, formatted).map((part: Part) => (
+    const formattedExpected = useMemo(() => format(expected, contentFormat), [expected, contentFormat]);
+    const formattedReceived = useMemo(() => format(received, contentFormat), [received, contentFormat]);
+    const diff = useMemo(() => {
+        if (!formattedExpected || !formattedReceived) return null;
+        return diffChars(formattedExpected, formattedReceived).map((part: Part) => (
             <span style={{ color: part.added ? 'green' : part.removed ? 'red' : '#555' }}>
                 {part.value}
             </span>
         ));
-    }, [formattedExpected, received, contentFormat]);
+    }, [formattedExpected, formattedReceived]);
 
     return (
         <div class="flex(& col) h-full">
             <Header />
             <main class="w-full lg:max-w-screen-2xl mx-auto px-6 py-12 flex-auto">
                 <section class="flex justify-center mb-16">
-                    <DiffBox id="received" content={formattedReceived} />
+                    <DiffBox id="received" content={diff} />
                 </section>
                 <section class="flex(& row) gap-4">
                     <PasteBox
