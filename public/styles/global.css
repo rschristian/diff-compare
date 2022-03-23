@@ -15,3 +15,15 @@ body {
 html {
   background-color: var(--color-timberwolf);
 }
+
+.diff {
+  background-color: gainsboro;
+}
+
+.addition {
+  color: green;
+}
+
+.removal {
+  color: red;
+}

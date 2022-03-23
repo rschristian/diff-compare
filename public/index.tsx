@@ -25,7 +25,7 @@ export function App() {
     const diff = useMemo(() => {
         if (!formattedExpected || !formattedReceived) return null;
         return diffChars(formattedExpected, formattedReceived).map((part: Part) => (
-            <span style={{ color: part.added ? 'green' : part.removed ? 'red' : '#555' }}>
+            <span class={`${part.added ? 'diff addition' : part.removed ? 'diff removal' : ''}`}>
                 {part.value}
             </span>
         ));
