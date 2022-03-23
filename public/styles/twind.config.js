@@ -15,7 +15,7 @@ export default {
         },
         extend: {
             height: {
-                112: '28rem'
+                112: '28rem',
             },
             minHeight: {
                 32: '8rem',

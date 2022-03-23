@@ -12,7 +12,11 @@ export function PasteBox(props: PasteBoxProps) {
             return <div class="mt-10" />;
         }
         return ['HTML', 'CSS', 'JS'].map((content) => (
-            <Tab label={content} setSelected={props.setContentFormat} selected={props.contentFormat === content} />
+            <Tab
+                label={content}
+                setSelected={props.setContentFormat}
+                selected={props.contentFormat === content}
+            />
         ));
     };
 

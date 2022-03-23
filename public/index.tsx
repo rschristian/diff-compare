@@ -20,8 +20,14 @@ export function App() {
     const [received, setReceived] = useLocalStorage('received', '');
     const [contentFormat, setContentFormat] = useLocalStorage('contentFormat', 'HTML');
 
-    const formattedExpected = useMemo(() => format(expected, contentFormat), [expected, contentFormat]);
-    const formattedReceived = useMemo(() => format(received, contentFormat), [received, contentFormat]);
+    const formattedExpected = useMemo(
+        () => format(expected, contentFormat),
+        [expected, contentFormat],
+    );
+    const formattedReceived = useMemo(
+        () => format(received, contentFormat),
+        [received, contentFormat],
+    );
     const diff = useMemo(() => {
         if (!formattedExpected || !formattedReceived) return null;
         return diffChars(formattedExpected, formattedReceived).map((part: Part) => (
