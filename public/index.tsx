@@ -1,6 +1,6 @@
 import { hydrate } from 'preact-iso';
 import { useMemo } from 'preact/hooks';
-import { diffChars } from 'diff';
+import { diffWords, diffLines } from 'diff';
 import twindConfig from './styles/twind.config';
 
 import { Header } from './components/Header';
@@ -31,7 +31,25 @@ export function App() {
     );
     const diff = useMemo(() => {
         if (!formattedExpected || !formattedReceived) return null;
-        return diffChars(formattedExpected, formattedReceived).map((part: Part) => (
+        if (!formattedExpected.match(/\n/g) || !formattedReceived.match(/\n/g)) {
+            return (
+                <p class="removal">
+                    One or both of the inputs resulted in a formatted output containing no newlines.
+                    This likely means that one (or both) are not in the correct format, and as such,
+                    a diff will not be attempted. Diffing content of different formats or the wrong
+                    format is rather expensive, so it is avoided.
+                </p>
+            );
+        }
+        // prettier-ignore
+        const diffMethod =
+            Math.max(
+                formattedExpected.match(/\n/g).length,
+                formattedReceived.match(/\n/g).length
+            ) > 300
+                ? diffLines
+                : diffWords;
+        return diffMethod(formattedExpected, formattedReceived).map((part: Part) => (
             <span class={`${part.added ? 'diff addition' : part.removed ? 'diff removal' : ''}`}>
                 {part.value}
             </span>
@@ -43,7 +61,7 @@ export function App() {
             <Header />
             <main class="w-full lg:max-w-screen-2xl mx-auto px-6 py-12 flex-auto">
                 <section class="flex justify-center mb-16">
-                    <DiffBox id="received" content={diff} />
+                    <DiffBox content={diff} />
                 </section>
                 <section class="flex(& row) gap-4">
                     <PasteBox
