@@ -1,3 +1,4 @@
+import { hydrate } from 'preact-iso';
 import { useMemo } from 'preact/hooks';
 import { diffChars } from 'diff';
 import twindConfig from './styles/twind.config';
@@ -68,7 +69,7 @@ if (import.meta.env.NODE_ENV === 'development') {
         hydrate(<App />);
     });
 } else {
-    import('preact-iso').then(({ hydrate }) => hydrate(<App />));
+    hydrate(<App />);
 }
 
 export async function prerender(data?: any) {
