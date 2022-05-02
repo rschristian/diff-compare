@@ -9,11 +9,14 @@
   },
   "dependencies": {
     "@rschristian/js-beautify": "^1.14.0",
-    "@twind/wmr": "^1.0.9",
+    "@rschristian/twind-wmr": "^0.2.0",
+    "@twind/preset-autoprefix": "^1.0.0-next.37",
+    "@twind/preset-tailwind": "^1.0.0-next.37",
     "diff": "^5.0.0",
     "preact": "^10.7.1",
     "preact-iso": "^2.3.0",
-    "twind": "^0.16.17",
+    "preact-render-to-string": "^5.2.0",
+    "twind": "^1.0.0-next.37",
     "wmr": "^3.7.2",
     "wmr-plugin-tailwind-grouping": "^0.1.5"
   },

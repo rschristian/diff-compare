@@ -1,7 +1,6 @@
-import { hydrate } from 'preact-iso';
 import { useMemo } from 'preact/hooks';
 import { diffWords, diffLines } from 'diff';
-import twindConfig from './styles/twind.config';
+import { withTwind } from '@rschristian/twind-wmr';
 
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -79,20 +78,11 @@ export function App() {
     );
 }
 
-if (import.meta.env.NODE_ENV === 'development') {
-    import('@twind/wmr').then(({ default: withTwind }) => {
-        const { hydrate } = withTwind({ props: { className: true }, ...twindConfig }, () => (
-            <App />
-        ));
-        hydrate(<App />);
-    });
-} else {
-    hydrate(<App />);
-}
+const { hydrate, prerender } = withTwind(
+    () => import('./styles/twind.config').then(({ twindConfig }) => twindConfig),
+    () => <App />,
+);
 
-export async function prerender(data?: any) {
-    const { default: withTwind } = await import('@twind/wmr');
-    return await withTwind({ props: { className: true }, ...twindConfig }, () => <App />).prerender(
-        data,
-    );
-}
+hydrate(<App />);
+
+export { prerender };

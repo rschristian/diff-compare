@@ -1,5 +1,9 @@
-/** @type {import('twind').Configuration} */
-export default {
+import { defineConfig } from 'twind';
+import presetTailwind from '@twind/preset-tailwind';
+import presetAutoprefix from '@twind/preset-autoprefix';
+
+export const twindConfig = defineConfig({
+    presets: [presetAutoprefix(), presetTailwind()],
     hash: false,
     theme: {
         colors: {
@@ -31,4 +35,4 @@ export default {
             },
         },
     },
-};
+});

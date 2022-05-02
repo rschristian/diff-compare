@@ -234,17 +234,30 @@
   resolved "https://registry.yarnpkg.com/@rschristian/js-beautify/-/js-beautify-1.14.0.tgz#cb98c958aeca1529ada94ebd1721b9bb79656f19"
   integrity sha512-uhaFQ/wTiOmbFoAYe/Ej604iRXaFy8nE9DTEzVDqXAg53zB9p4eow1xHUILlI5KpQB65s4L9vcHHPYcIP1Ac1g==
 
-"@twind/preact@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@twind/preact/-/preact-1.0.5.tgz#8fbbad16bf756d63e73b44f4c6dd7ef5a56144e9"
-  integrity sha512-VG4ja6EHOWUs0mVsKMfGobAC6C7NTJOVjirgQERXXqcbevlu1HU+vckNlBntlftq0c6LXHEpzwbghM3o42N/fw==
+"@rschristian/twind-wmr@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@rschristian/twind-wmr/-/twind-wmr-0.2.0.tgz#708a684dd485fcfde6b8a127316237341a605a36"
+  integrity sha512-V2BaUMF6a9t5u+l1kqLxRDjwHyPILUhczSiiPZb/3BC2Jaip2FKTAtjrT6EqOncdg8QjWqeNjSIJbd4vqnbpkw==
 
-"@twind/wmr@^1.0.9":
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/@twind/wmr/-/wmr-1.0.9.tgz#a268db9f400ad55c3466336ef3b38635f39514eb"
-  integrity sha512-+qcx4r6KZnC/DsFIYe9iwAmuWjX5pFjN0pWxMlwFFgJJtxBsKG3xXOfo1urA2T2YCjTWoGebTqpQQhi19so6EQ==
+"@swc/helpers@^0.3.3":
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.3.9.tgz#59d8be38422c6085487db383603ed589cb5be39b"
+  integrity sha512-TLzWHAHOrzxauG2uB+5t7fqdom0CDiIbtjJ5zbhnT+SsGmipB767Hrw+d4/si8aS/wrYgWbqjbBR4Y0bxSyLxw==
+
+"@twind/preset-autoprefix@^1.0.0-next.37":
+  version "1.0.0-next.37"
+  resolved "https://registry.yarnpkg.com/@twind/preset-autoprefix/-/preset-autoprefix-1.0.0-next.37.tgz#1eb2d4af05f640c8b5e472aa0269a9b94ecd7ede"
+  integrity sha512-eZkZVZZ+psdC9/2sZVLBRVpbMFvbxfU6t/1JgOKCzPPHvGjmLIsGM++HAHimSoyxjwYqKWHk0Q0S6+5xQfAkTQ==
   dependencies:
-    "@twind/preact" "^1.0.5"
+    "@swc/helpers" "^0.3.3"
+    style-vendorizer "^2.1.1"
+
+"@twind/preset-tailwind@^1.0.0-next.37":
+  version "1.0.0-next.37"
+  resolved "https://registry.yarnpkg.com/@twind/preset-tailwind/-/preset-tailwind-1.0.0-next.37.tgz#8b003f18ed8dd65ed9b3f610315fa99880d79f30"
+  integrity sha512-cp+M/Vkrh6Bx/O9Djd++goYcm/Z5kNnleY/jKHx57eMVTwYsdud6n9pYCp0sVN6mO5HM7XqY3fyEhzlLO66Gxw==
+  dependencies:
+    "@swc/helpers" "^0.3.3"
 
 "@types/node@^14.18.16":
   version "14.18.16"
@@ -302,7 +315,7 @@ convert-source-map@^1.7.0:
   dependencies:
     safe-buffer "~5.1.1"
 
-csstype@^3.0.5:
+csstype@^3.0.10:
   version "3.0.11"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.11.tgz#d66700c5eacfac1940deb4e3ee5642792d85cd33"
   integrity sha512-sa6P2wJ+CAbgyy4KFssIb/JNMLxFvKF1pCYCSXS8ZMuqZnMsrxqI2E5sPyoTpxoPU/gVZMzr2zjOfg8GIZOMsw==
@@ -319,45 +332,10 @@ diff@^5.0.0:
   resolved "https://registry.yarnpkg.com/diff/-/diff-5.0.0.tgz#7ed6ad76d859d030787ec35855f5b1daf31d852b"
   integrity sha512-/VTCrvm5Z0JGty/BWHljh+BAiw3IK+2j87NGMu8Nwc/f48WoDAC395uomO9ZD117ZOBaHmkX1oyLvkVM/aIT3w==
 
-dom-serializer@^1.0.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/dom-serializer/-/dom-serializer-1.4.1.tgz#de5d41b1aea290215dc45a6dae8adcf1d32e2d30"
-  integrity sha512-VHwB3KfrcOOkelEG2ZOfxqLZdfkil8PtJi4P8N2MMXucZq2yLp75ClViUlOVwyoHEDjYU433Aq+5zWP61+RGag==
-  dependencies:
-    domelementtype "^2.0.1"
-    domhandler "^4.2.0"
-    entities "^2.0.0"
-
-domelementtype@^2.0.1, domelementtype@^2.2.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/domelementtype/-/domelementtype-2.3.0.tgz#5c45e8e869952626331d7aab326d01daf65d589d"
-  integrity sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==
-
-domhandler@^4.0.0, domhandler@^4.2.0:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/domhandler/-/domhandler-4.3.1.tgz#8d792033416f59d68bc03a5aa7b018c1ca89279c"
-  integrity sha512-GrwoxYN+uWlzO8uhUXRl0P+kHE4GtVPfYzVLcUxPL7KNdHKj66vvlhiweIHqYYXWlw+T8iLMp42Lm67ghw4WMQ==
-  dependencies:
-    domelementtype "^2.2.0"
-
-domutils@^2.5.2:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/domutils/-/domutils-2.8.0.tgz#4437def5db6e2d1f5d6ee859bd95ca7d02048135"
-  integrity sha512-w96Cjofp72M5IIhpjgobBimYEfoPjx1Vx0BSX9P30WBdZW2WIKU0T1Bd0kz2eNZ9ikjKgHbEyKx8BB6H1L3h3A==
-  dependencies:
-    dom-serializer "^1.0.1"
-    domelementtype "^2.2.0"
-    domhandler "^4.2.0"
-
 electron-to-chromium@^1.4.76:
   version "1.4.80"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.80.tgz#299a1ea3e32810934b4e3c2e4d4cb53136fdab3f"
   integrity sha512-COsbJCGVYCc/aAY4cd94x1Js3q0r406YKGbdL8LXHg0O9dEjuFEFU/vZneRxBxKo/f1lLHi0YyAR7sbFM+i8Bg==
-
-entities@^2.0.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/entities/-/entities-2.2.0.tgz#098dc90ebb83d8dffa089d55256b351d34c4da55"
-  integrity sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==
 
 escalade@^3.1.1:
   version "3.1.1"
@@ -383,16 +361,6 @@ has-flag@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
   integrity sha1-tdRU3CGZriJWmfNGfloH87lVuv0=
-
-htmlparser2@^6.0.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-6.1.0.tgz#c4d762b6c3371a05dbe65e94ae43a9f845fb8fb7"
-  integrity sha512-gyyPk6rgonLFEDGoeRgQNaEUvdJ4ktTmmUh/h2t7s+M8oPpIPxgNACWa+6ESR57kXstwqPiCut0V8NRpcwgU7A==
-  dependencies:
-    domelementtype "^2.0.1"
-    domhandler "^4.0.0"
-    domutils "^2.5.2"
-    entities "^2.0.0"
 
 js-tokens@^4.0.0:
   version "4.0.0"
@@ -436,6 +404,13 @@ preact-iso@^2.3.0:
   resolved "https://registry.yarnpkg.com/preact-iso/-/preact-iso-2.3.0.tgz#ab6c5de28df9e0f7a0589dd2175a83ba821f69ec"
   integrity sha512-taJmRidbWrjHEhoVoxXS2Kvxa6X3jXSsTtD7rSYeJuxnPNr1ghCu1JUzCrRxmZwTUNWIqwUpNi+AJoLtvCPN7g==
 
+preact-render-to-string@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/preact-render-to-string/-/preact-render-to-string-5.2.0.tgz#3d3c4f9c570229b76d33353ed02ce662bd13dec1"
+  integrity sha512-+RGwSW78Cl+NsZRUbFW1MGB++didsfqRk+IyRVTaqy+3OjtpKK/6HgBtfszUX0YXMfo41k2iaQSseAHGKEwrbg==
+  dependencies:
+    pretty-format "^3.8.0"
+
 preact@^10.7.1:
   version "10.7.1"
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.7.1.tgz#bdd2b2dce91a5842c3b9b34dfe050e5401068c9e"
@@ -450,6 +425,11 @@ prettier@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.6.0.tgz#12f8f504c4d8ddb76475f441337542fa799207d4"
   integrity sha512-m2FgJibYrBGGgQXNzfd0PuDGShJgRavjUoRCw1mZERIWVSXF0iLzLm+aOqTAbLnC3n6JzUhAA8uZnFVghHJ86A==
+
+pretty-format@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-3.8.0.tgz#bfbed56d5e9a776645f4b1ff7aa1a3ac4fa3c385"
+  integrity sha1-v77VbV6ad2ZF9LH/eqGjrE+jw4U=
 
 safe-buffer@~5.1.1:
   version "5.1.2"
@@ -466,7 +446,7 @@ source-map@^0.5.0:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
   integrity sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=
 
-style-vendorizer@^2.0.0:
+style-vendorizer@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/style-vendorizer/-/style-vendorizer-2.1.1.tgz#5f06601c1724cfb314fe1153e7e442c58dde771c"
   integrity sha512-gVO6Cwxtg8iX0X1W4xMhSc5WbQpiIBQDkhq3JkwebMRRgyhCfuvMrnPlTAGTRjfQPGRmzgjCOZ4drehTnLahHA==
@@ -483,14 +463,13 @@ to-fast-properties@^2.0.0:
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz#dc5e698cbd079265bc73e0377681a4e4e83f616e"
   integrity sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=
 
-twind@^0.16.17:
-  version "0.16.17"
-  resolved "https://registry.yarnpkg.com/twind/-/twind-0.16.17.tgz#ca8434d7570cd4246ea2f9d6269aa597e00730aa"
-  integrity sha512-dBKm8+ncJcIALiqBRLxA/krFEwUSjnzR+N73eKgqPtVPJqfLpkajWwKWL5xEpEQ5ypS3ffa0jJjH3/eIeuA3pw==
+twind@^1.0.0-next.37:
+  version "1.0.0-next.37"
+  resolved "https://registry.yarnpkg.com/twind/-/twind-1.0.0-next.37.tgz#e2980773bdba4f046548c237268cb0262bddc06a"
+  integrity sha512-+aHzdV+u2Ttyun6a0ug2Qmj/+J/zgIJFJnITj4A4hdXnjAdE7lQoBng9eKWrogatscfiDXWoW/ntfYg1BO7Bsg==
   dependencies:
-    csstype "^3.0.5"
-    htmlparser2 "^6.0.0"
-    style-vendorizer "^2.0.0"
+    "@swc/helpers" "^0.3.3"
+    csstype "^3.0.10"
 
 typescript@^4.6.2:
   version "4.6.2"
