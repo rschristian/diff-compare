@@ -7,7 +7,7 @@ type Props = {
 export function DiffBox(props: Props) {
     return (
         <pre
-            class={`min-h-32 lg:h-112 w(full xl:1/2) p-2 bg-alabaster overflow-auto rounded shadow-md ${
+            class={`min-h-8 max-h-96 w-full p-2 bg-code(& dark:dark) overflow-auto rounded shadow-md ${
                 !props.content || props.content.type == 'p' ? 'whitespace-normal' : ''
             }`}
         >

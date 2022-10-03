@@ -2,12 +2,12 @@ import { useMemo } from 'preact/hooks';
 import { diffWords, diffLines } from 'diff';
 import { withTwind } from '@rschristian/twind-wmr';
 
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
+import { Header } from './components/core/Header';
+import { Footer } from './components/core/Footer';
 import { PasteBox } from './components/PasteBox';
 import { DiffBox } from './components/DiffBox';
 import { useLocalStorage } from './hooks/useLocalStorage';
-import { format } from './utils';
+import { format } from './utils/format';
 
 type Part = {
     added?: boolean;
@@ -56,21 +56,27 @@ export function App() {
     }, [formattedExpected, formattedReceived]);
 
     return (
-        <div class="flex(& col) h-full">
+        <div class="flex(& col) h-full px-5 text(content dark:content-dark) bg([#f8f8f8] dark:[#2a2727])">
             <Header />
-            <main class="w-full lg:max-w-screen-2xl mx-auto px-6 py-12 flex-auto">
-                <section class="flex justify-center mb-16">
-                    <DiffBox content={diff} />
+            <main class="w-full lg:max-w-screen-2xl flex-1 mb(16 md:32) mx-auto">
+                <section class="w-full lg:max-w-4xl mx-auto">
+                    <h1 class="mb-2 text(primary(dark dark:light) 5xl center lg:left)">
+                        Diff & Compare
+                    </h1>
+                    <p class="text-xl mb-12">Compare plaintext, HTML, CSS, JS and JSON strings</p>
+                    <section class="flex justify-center mb-16">
+                        <DiffBox content={diff} />
+                    </section>
                 </section>
-                <section class="flex(& row) gap-4">
+                <section class="flex(& col lg:row) gap-4">
                     <PasteBox
-                        placeholder="Expected"
+                        label="Expected"
                         value={expected}
                         setContent={setExpected}
                         contentFormat={contentFormat}
                         setContentFormat={setContentFormat}
                     />
-                    <PasteBox placeholder="Received" value={received} setContent={setReceived} />
+                    <PasteBox label="Received" value={received} setContent={setReceived} />
                 </section>
             </main>
             <Footer />

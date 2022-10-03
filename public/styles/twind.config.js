@@ -3,18 +3,27 @@ import presetTailwind from '@twind/preset-tailwind';
 import presetAutoprefix from '@twind/preset-autoprefix';
 
 export const twindConfig = defineConfig({
+    darkMode: 'class',
     presets: [presetAutoprefix(), presetTailwind()],
     hash: false,
     theme: {
         colors: {
-            alabaster: '#F1F2EB',
-            timberwolf: '#D8DAD3',
-            davysGrey: '#4A4A48',
-            ebony: '#566246',
-            cambridgeBlue: '#A4C2A5',
-            cadet: {
-                DEFAULT: '#4A6D7C',
-                brighter: '#6A8D9C',
+            primary: {
+                dark: '#04a579',
+                DEFAULT: '#06c390',
+                light: '#24e1a8',
+            },
+            content: {
+                DEFAULT: '#24292f',
+                dark: '#ddd',
+            },
+            code: {
+                DEFAULT: '#fff',
+                dark: '#1b1818',
+            },
+            white: {
+                muted: '#999',
+                DEFAULT: '#ffffff',
             },
         },
         extend: {
@@ -23,7 +32,7 @@ export const twindConfig = defineConfig({
             },
             minHeight: {
                 32: '8rem',
-                48: '12rem',
+                64: '16rem',
             },
             minWidth: {
                 10: '2.5rem',
@@ -35,4 +44,5 @@ export const twindConfig = defineConfig({
             },
         },
     },
+    variants: [['hocus', '&:hover,&:focus-visible']],
 });

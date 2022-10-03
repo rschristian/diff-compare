@@ -1,23 +1,19 @@
 html,
 body {
-  height: 100%;
+  min-height: 100%;
 }
 
-:root {
-  --color-alabaster: #f1f2eb;
-  --color-timberwolf: #d8dad3;
-  --color-davys-grey: #4a4a48;
-  --color-ebony: #566246;
-  --color-cambridge-blue: #a4c2a5;
-  --color-cadet: #4a6d7c;
-}
-
-html {
-  background-color: var(--color-timberwolf);
+svg {
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 .diff {
-  background-color: gainsboro;
+  background-color: #dcdcdc;
+}
+
+.dark .diff {
+  background-color: #ccc;
 }
 
 .addition {

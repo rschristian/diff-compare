@@ -7,7 +7,9 @@ export function format(input: string, contentFormat: 'HTML' | 'CSS' | 'JS'): str
             return beautifyHtml(input, { extra_liners: [], indent_inner_html: true });
         case 'CSS':
             return beautifyCss(input);
-        default:
+        case 'JS':
             return beautifyJs(input);
+        default:
+            return input;
     }
 }
