@@ -48,6 +48,7 @@ export function App() {
             ) > 300
                 ? diffLines
                 : diffWords;
+
         return diffMethod(formattedExpected, formattedReceived).map((part: Part) => (
             <span class={`${part.added ? 'diff addition' : part.removed ? 'diff removal' : ''}`}>
                 {part.value}

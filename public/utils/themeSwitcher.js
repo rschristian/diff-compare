@@ -2,6 +2,11 @@ if (import.meta.env.NODE_ENV !== 'production') {
     while (!document.querySelector('#theme-switcher')) {
         await new Promise((r) => setTimeout(r, 50));
     }
+} else {
+    // @ts-ignore
+    while (!document.body.__k) {
+        await new Promise((r) => setTimeout(r, 50));
+    }
 }
 
 const themeSwitcher = document.getElementById('theme-switcher'),
