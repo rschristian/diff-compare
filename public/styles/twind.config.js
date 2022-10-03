@@ -25,6 +25,7 @@ export const twindConfig = defineConfig({
                 muted: '#999',
                 DEFAULT: '#ffffff',
             },
+            transparent: 'transparent',
         },
         extend: {
             height: {
