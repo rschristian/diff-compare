@@ -57,7 +57,7 @@ export function App() {
     }, [formattedExpected, formattedReceived]);
 
     return (
-        <div class="flex(& col) h-full px-5 text(content dark:content-dark) bg([#f8f8f8] dark:[#2a2727])">
+        <div class="flex(& col) min-h-screen px-5 text(content dark:content-dark) bg([#f8f8f8] dark:[#2a2727])">
             <Header />
             <main class="w-full lg:max-w-screen-2xl flex-1 mb(16 md:32) mx-auto">
                 <section class="w-full lg:max-w-4xl mx-auto">
