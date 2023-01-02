@@ -8,23 +8,23 @@
     "format": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@rschristian/intrepid-design": "^0.1.0",
     "@rschristian/js-beautify": "^1.14.0",
-    "@rschristian/twind-wmr": "^0.2.0",
-    "@twind/preset-autoprefix": "^1.0.0-next.37",
-    "@twind/preset-tailwind": "^1.0.0-next.37",
+    "@rschristian/twind-wmr": "^0.3.0",
+    "@twind/core": "^1.1.2",
+    "@twind/preset-tailwind": "^1.1.2",
     "diff": "^5.1.0",
-    "preact": "^10.11.0",
-    "preact-iso": "^2.3.0",
-    "preact-render-to-string": "^5.2.4",
-    "twind": "^1.0.0-next.37",
+    "preact": "^10.11.3",
+    "preact-iso": "^2.3.1",
+    "preact-render-to-string": "^5.2.6",
     "wmr": "^3.8.0",
     "wmr-plugin-tailwind-grouping": "^0.1.5"
   },
   "devDependencies": {
     "@types/node": "^16.11.0",
-    "prettier": "^2.7.1",
+    "prettier": "^2.8.1",
     "prettier-config-rschristian": "^0.1.1",
-    "typescript": "^4.6.2"
+    "typescript": "^4.9.4"
   },
   "prettier": "prettier-config-rschristian"
 }

@@ -1,6 +1,6 @@
 import type { VNode } from 'preact';
 
-type Props = {
+interface Props {
     content: VNode;
 };
 

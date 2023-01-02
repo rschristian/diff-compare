@@ -1,5 +1,5 @@
 if (import.meta.env.NODE_ENV !== 'production') {
-    while (!document.querySelector('#theme-switcher')) {
+    while (!document.querySelector('#theme-toggle')) {
         await new Promise((r) => setTimeout(r, 50));
     }
 } else {
@@ -9,7 +9,7 @@ if (import.meta.env.NODE_ENV !== 'production') {
     }
 }
 
-const themeSwitcher = document.getElementById('theme-switcher'),
+const themeToggle = document.getElementById('theme-toggle'),
     moon = document.getElementById('dark-mode'),
     sun = document.getElementById('light-mode');
 
@@ -28,4 +28,4 @@ function toggle() {
     localStorage.theme = theme;
 }
 
-themeSwitcher.addEventListener('click', toggle);
+themeToggle.addEventListener('click', toggle);

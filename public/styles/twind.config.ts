@@ -1,10 +1,9 @@
-import { defineConfig } from 'twind';
+import { defineConfig } from '@twind/core';
 import presetTailwind from '@twind/preset-tailwind';
-import presetAutoprefix from '@twind/preset-autoprefix';
 
 export const twindConfig = defineConfig({
     darkMode: 'class',
-    presets: [presetAutoprefix(), presetTailwind()],
+    presets: [presetTailwind()],
     hash: false,
     theme: {
         colors: {
@@ -16,6 +15,10 @@ export const twindConfig = defineConfig({
             content: {
                 DEFAULT: '#24292f',
                 dark: '#ddd',
+            },
+            page: {
+                DEFAULT: '#f8f8f8',
+                dark: '#272a27',
             },
             code: {
                 DEFAULT: '#fff',

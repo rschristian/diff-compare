@@ -1,4 +1,4 @@
-type TabProps = {
+interface TabProps {
     label: string;
     setSelected: (label: string) => void;
     selected: boolean;
@@ -17,7 +17,7 @@ function Tab(props: TabProps) {
     );
 }
 
-type TabsProps = {
+interface TabsProps {
     contentFormat?: 'HTML' | 'CSS' | 'JS';
     setContentFormat?: (newVal: string) => void;
 };

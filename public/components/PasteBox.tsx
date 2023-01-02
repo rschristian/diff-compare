@@ -1,6 +1,6 @@
-import { Tabs } from './Tabs';
+import { Tabs } from './Tabs.js';
 
-type PasteBoxProps = {
+interface PasteBoxProps {
     label: string;
     value: string;
     setContent: (newVal: string) => void;

@@ -2,14 +2,14 @@ import { useMemo } from 'preact/hooks';
 import { diffWords, diffLines } from 'diff';
 import { withTwind } from '@rschristian/twind-wmr';
 
-import { Header } from './components/core/Header';
-import { Footer } from './components/core/Footer';
-import { PasteBox } from './components/PasteBox';
-import { DiffBox } from './components/DiffBox';
-import { useLocalStorage } from './hooks/useLocalStorage';
-import { format } from './utils/format';
+import { Root, Header, Main, Footer } from '@rschristian/intrepid-design';
 
-type Part = {
+import { PasteBox } from './components/PasteBox.js';
+import { DiffBox } from './components/DiffBox.js';
+import { useLocalStorage } from './hooks/useLocalStorage.js';
+import { format } from './utils/format.js';
+
+interface Part {
     added?: boolean;
     removed?: boolean;
     value: string;
@@ -57,14 +57,26 @@ export function App() {
     }, [formattedExpected, formattedReceived]);
 
     return (
-        <div class="flex(& col) min-h-screen px-5 text(content dark:content-dark) bg([#f8f8f8] dark:[#272a27])">
-            <Header />
-            <main class="w-full lg:max-w-screen-2xl flex-1 mb(16 md:32) mx-auto">
+        <Root>
+            <Header RSC={{ href: 'https://github.com/rschristian', label: 'My GitHub Account' }}>
+                <Header.NavItem
+                    href="https://github.com/rschristian/diff-compare"
+                    label="Source Code on GitHub"
+                    iconId="github"
+                />
+                <Header.NavItem
+                    href="https://twitter.com/_rschristian"
+                    label="My Twitter Account"
+                    iconId="twitter"
+                />
+                <Header.ThemeToggle />
+            </Header>
+            <Main widthStyle="w-full lg:max-w-screen-2xl">
                 <section class="w-full lg:max-w-4xl mx-auto">
                     <h1 class="mb-2 text(primary(dark dark:light) 5xl center lg:left)">
                         Diff & Compare
                     </h1>
-                    <p class="text-xl mb-12">Compare plaintext, HTML, CSS, JS and JSON strings</p>
+                    <p class="mb-12 text(xl center lg:left)">Compare plaintext, HTML, CSS, JS and JSON strings</p>
                     <section class="flex justify-center mb-16">
                         <DiffBox content={diff} />
                     </section>
@@ -79,14 +91,14 @@ export function App() {
                     />
                     <PasteBox label="Received" value={received} setContent={setReceived} />
                 </section>
-            </main>
-            <Footer />
-        </div>
+            </Main>
+            <Footer year={2022} />
+        </Root>
     );
 }
 
 const { hydrate, prerender } = withTwind(
-    () => import('./styles/twind.config').then(({ twindConfig }) => twindConfig),
+    () => import('./styles/twind.config.js'),
     () => <App />,
 );
 
