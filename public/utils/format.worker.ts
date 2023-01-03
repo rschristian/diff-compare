@@ -1,6 +1,7 @@
 import { beautifyHtml, beautifyJs, beautifyCss } from '@rschristian/js-beautify';
+import type { ContentFormat } from '../index.js';
 
-export function format(input: string, contentFormat: 'HTML' | 'CSS' | 'JS'): string {
+function format(input: string, contentFormat: ContentFormat): string {
     input = input.replace(/\\/g, '');
     switch (contentFormat) {
         case 'HTML':
@@ -13,3 +14,7 @@ export function format(input: string, contentFormat: 'HTML' | 'CSS' | 'JS'): str
             return input;
     }
 }
+
+addEventListener('message', ({ data }) => {
+    postMessage(format(data.input, data.contentFormat));
+});

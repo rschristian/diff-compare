@@ -1,10 +1,11 @@
+import type { ContentFormat } from '../index.js';
 import { Tabs } from './Tabs.js';
 
 interface PasteBoxProps {
     label: string;
     value: string;
     setContent: (newVal: string) => void;
-    contentFormat?: 'HTML' | 'CSS' | 'JS';
+    contentFormat?: ContentFormat;
     setContentFormat?: (newVal: string) => void;
 };
 

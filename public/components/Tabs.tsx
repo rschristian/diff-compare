@@ -1,3 +1,5 @@
+import type { ContentFormat } from '../index.js';
+
 interface TabProps {
     label: string;
     setSelected: (label: string) => void;
@@ -18,7 +20,7 @@ function Tab(props: TabProps) {
 }
 
 interface TabsProps {
-    contentFormat?: 'HTML' | 'CSS' | 'JS';
+    contentFormat?: ContentFormat;
     setContentFormat?: (newVal: string) => void;
 };
 
