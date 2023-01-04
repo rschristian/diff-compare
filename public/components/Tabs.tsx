@@ -1,16 +1,17 @@
+import type { Signal } from '@preact/signals';
+
 interface TabProps {
     label: string;
-    setSelected: (label: string) => void;
-    selected: boolean;
+    contentFormat: Signal<string>;
 };
 
 function Tab(props: TabProps) {
     return (
         <button
             class={`min-w(10 lg:16) h-10 p-2 bg-${
-                props.selected ? 'primary-light' : 'primary-dark'
+                props.contentFormat.value == props.label ? 'primary-light' : 'primary-dark'
             } text-white rounded-t-lg border(& 1 code dark:code-dark)`}
-            onClick={() => props.setSelected(props.label)}
+            onClick={() => props.contentFormat.value = props.label}
         >
             {props.label}
         </button>
@@ -18,8 +19,7 @@ function Tab(props: TabProps) {
 }
 
 interface TabsProps {
-    contentFormat?: 'HTML' | 'CSS' | 'JS';
-    setContentFormat?: (newVal: string) => void;
+    contentFormat?: Signal<'PlainText' | 'HTML' | 'CSS' | 'JS'>;
 };
 
 export function Tabs(props: TabsProps) {
@@ -29,11 +29,10 @@ export function Tabs(props: TabsProps) {
 
     return (
         <>
-            {['Plaintext', 'HTML', 'CSS', 'JS'].map((content) => (
+            {['Plaintext', 'HTML', 'CSS', 'JS'].map((label) => (
                 <Tab
-                    label={content}
-                    setSelected={props.setContentFormat}
-                    selected={props.contentFormat === content}
+                    label={label}
+                    contentFormat={props.contentFormat}
                 />
             ))}
         </>

@@ -1,42 +1,27 @@
-import { useState } from 'preact/hooks';
+import { effect, signal, Signal } from '@preact/signals';
 
-export function useLocalStorage(key: string, initialValue: string) {
-    // State to store our value
-    // Pass initial state function to useState so logic is only executed once
-    const [storedValue, setStoredValue] = useState(() => {
-        if (typeof window === 'undefined') {
-            return initialValue;
-        }
+import { contentFormat } from '../index.js';
 
-        try {
-            // Get from local storage by key
-            const item = window.localStorage.getItem(key);
-            // Parse stored json or if none return initialValue
-            return item ? JSON.parse(item) : initialValue;
-        } catch (error) {
-            // If error also return initialValue
-            console.log(error);
-            return initialValue;
+function formatContent(inputSignal: Signal<string>, outputSignal: Signal<string>) {
+    const formatWorker = new Worker(new URL('../workers/format.worker.js', import.meta.url));
+    formatWorker.postMessage({ input: inputSignal.value, contentFormat: contentFormat.value });
+    formatWorker.addEventListener('message', (e) => outputSignal.value = e.data);
+    return () => formatWorker.terminate();
+}
+
+export function localStorageSignal(key: string, initialValue: string) {
+    let initialized = false;
+    const lsSignal = signal(initialValue);
+    const lsSignalFormatted = signal('');
+
+    effect(() => {
+        if (typeof window !== 'undefined') {
+            if (key !== 'contentFormat') formatContent(lsSignal, lsSignalFormatted);
+
+            if (initialized) window.localStorage.setItem(key, JSON.stringify(lsSignal.value));
+            else initialized = true;
         }
     });
 
-    // Return a wrapped version of useState's setter function that ...
-    // ... persists the new value to localStorage.
-    const setValue = (value: (a: string) => void | string) => {
-        try {
-            // Allow value to be a function so we have same API as useState
-            const valueToStore = value instanceof Function ? value(storedValue) : value;
-            // Save state
-            setStoredValue(valueToStore);
-            // Save to local storage
-            if (typeof window !== 'undefined') {
-                window.localStorage.setItem(key, JSON.stringify(valueToStore));
-            }
-        } catch (error) {
-            // A more advanced implementation would handle the error case
-            console.log(error);
-        }
-    };
-
-    return [storedValue, setValue];
+    return key === 'contentFormat' ? lsSignal : [lsSignal, lsSignalFormatted];
 }

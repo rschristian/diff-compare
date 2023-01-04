@@ -1,60 +1,29 @@
-import { useMemo } from 'preact/hooks';
-import { diffWords, diffLines } from 'diff';
+import { useEffect } from 'preact/hooks';
+import { Signal } from '@preact/signals';
 import { withTwind } from '@rschristian/twind-wmr';
 
 import { Root, Header, Main, Footer } from '@rschristian/intrepid-design';
 
 import { PasteBox } from './components/PasteBox.js';
 import { DiffBox } from './components/DiffBox.js';
-import { useLocalStorage } from './hooks/useLocalStorage.js';
-import { format } from './utils/format.js';
+import { localStorageSignal } from './hooks/useLocalStorage.js';
 
-interface Part {
-    added?: boolean;
-    removed?: boolean;
-    value: string;
-};
+type ContentFormat = 'PlainText' | 'HTML' | 'CSS' | 'JS';
+
+export const contentFormat = localStorageSignal('contentFormat', 'HTML') as Signal<ContentFormat>;
+const [expected, formattedExpected] = localStorageSignal('expected', '') as [Signal<string>, Signal<string>];
+const [received, formattedReceived] = localStorageSignal('received', '') as [Signal<string>, Signal<string>];
 
 export function App() {
-    const [expected, setExpected] = useLocalStorage('expected', '');
-    const [received, setReceived] = useLocalStorage('received', '');
-    const [contentFormat, setContentFormat] = useLocalStorage('contentFormat', 'HTML');
-
-    const formattedExpected = useMemo(
-        () => format(expected, contentFormat),
-        [expected, contentFormat],
-    );
-    const formattedReceived = useMemo(
-        () => format(received, contentFormat),
-        [received, contentFormat],
-    );
-    const diff = useMemo(() => {
-        if (!formattedExpected || !formattedReceived) return null;
-        if (!formattedExpected.match(/\n/g) || !formattedReceived.match(/\n/g)) {
-            return (
-                <p class="removal">
-                    One or both of the inputs resulted in a formatted output containing no newlines.
-                    This likely means that one (or both) are not in the correct format, and as such,
-                    a diff will not be attempted. Diffing content of different formats or the wrong
-                    format is rather expensive, so it is avoided.
-                </p>
-            );
+    useEffect(() => {
+        const getFromLocalStorage = (signal: Signal, key: string) => {
+            const item = window.localStorage.getItem(key);
+            if (item) signal.value = JSON.parse(item);
         }
-        // prettier-ignore
-        const diffMethod =
-            Math.max(
-                formattedExpected.match(/\n/g).length,
-                formattedReceived.match(/\n/g).length
-            ) > 300
-                ? diffLines
-                : diffWords;
-
-        return diffMethod(formattedExpected, formattedReceived).map((part: Part) => (
-            <span class={`${part.added ? 'diff addition' : part.removed ? 'diff removal' : ''}`}>
-                {part.value}
-            </span>
-        ));
-    }, [formattedExpected, formattedReceived]);
+        getFromLocalStorage(contentFormat, 'contentFormat');
+        getFromLocalStorage(expected, 'expected');
+        getFromLocalStorage(received, 'received');
+    });
 
     return (
         <Root>
@@ -78,18 +47,16 @@ export function App() {
                     </h1>
                     <p class="mb-12 text(xl center lg:left)">Compare plaintext, HTML, CSS, JS and JSON strings</p>
                     <section class="flex justify-center mb-16">
-                        <DiffBox content={diff} />
+                        <DiffBox expected={formattedExpected} received={formattedReceived} />
                     </section>
                 </section>
                 <section class="flex(& col lg:row) gap-4">
                     <PasteBox
                         label="Expected"
-                        value={expected}
-                        setContent={setExpected}
+                        content={expected}
                         contentFormat={contentFormat}
-                        setContentFormat={setContentFormat}
                     />
-                    <PasteBox label="Received" value={received} setContent={setReceived} />
+                    <PasteBox label="Received" content={received} />
                 </section>
             </Main>
             <Footer year={2022} />
