@@ -2,8 +2,8 @@ import type { ContentFormat } from '../index.js';
 
 interface TabProps {
     label: string;
-    setSelected: (label: string) => void;
     selected: boolean;
+    setSelected: (label: string) => void;
 };
 
 function Tab(props: TabProps) {
@@ -25,17 +25,13 @@ interface TabsProps {
 };
 
 export function Tabs(props: TabsProps) {
-    if (!props.contentFormat) {
-        return <div class="mt-10" />;
-    }
-
     return (
         <>
             {['Plaintext', 'HTML', 'CSS', 'JS'].map((content) => (
                 <Tab
                     label={content}
-                    setSelected={props.setContentFormat}
                     selected={props.contentFormat === content}
+                    setSelected={props.setContentFormat}
                 />
             ))}
         </>

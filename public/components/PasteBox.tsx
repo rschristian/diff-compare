@@ -3,7 +3,7 @@ import { Tabs } from './Tabs.js';
 
 interface PasteBoxProps {
     label: string;
-    value: string;
+    content: string;
     setContent: (newVal: string) => void;
     contentFormat?: ContentFormat;
     setContentFormat?: (newVal: string) => void;
@@ -30,7 +30,7 @@ export function PasteBox(props: PasteBoxProps) {
                 id={props.label}
                 class="min-h-64 w-full p-2 bg-code(& dark:dark) rounded focus:(ring(& primary-light) outline-none) shadow-md"
                 placeholder={props.label}
-                value={props.value}
+                value={props.content}
                 onInput={(e) => props.setContent((e.target as HTMLTextAreaElement).value)}
             />
         </div>

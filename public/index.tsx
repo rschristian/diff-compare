@@ -45,12 +45,12 @@ export function App() {
                 <section class="flex(& col lg:row) gap-4">
                     <PasteBox
                         label="Expected"
-                        value={expected}
+                        content={expected}
                         setContent={setExpected}
                         contentFormat={contentFormat}
                         setContentFormat={setContentFormat}
                     />
-                    <PasteBox label="Received" value={received} setContent={setReceived} />
+                    <PasteBox label="Received" content={received} setContent={setReceived} />
                 </section>
             </Main>
             <Footer year={2022} />
