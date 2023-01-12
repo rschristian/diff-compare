@@ -12,7 +12,7 @@ export type ContentFormat = 'PlainText' | 'HTML' | 'CSS' | 'JS';
 export function App() {
     const [expected, setExpected] = useLocalStorage('expected', '');
     const [received, setReceived] = useLocalStorage('received', '');
-    const [contentFormat, setContentFormat] = useLocalStorage('contentFormat', 'HTML');
+    const [contentFormat, setContentFormat] = useLocalStorage<ContentFormat>('contentFormat', 'HTML');
 
     const formattedExpected = useFormatted(expected, contentFormat);
     const formattedReceived = useFormatted(received, contentFormat);
