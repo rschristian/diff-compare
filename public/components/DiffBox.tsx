@@ -15,22 +15,22 @@ interface Props {
 export function DiffBox(props: Props) {
     const diff = useMemo(() => {
         if (!props.formattedExpected || !props.formattedReceived) return null;
-        if (!props.formattedExpected.match(/\n/g) || !props.formattedReceived.match(/\n/g)) {
-            return (
-                <p class="removal">
-                    One or both of the inputs resulted in a formatted output containing no newlines.
-                    This likely means that one (or both) are not in the correct format, and as such,
-                    a diff will not be attempted. Diffing content of different formats or the wrong
-                    format is rather expensive, so it is avoided.
-                </p>
-            );
-        }
+        //if (!props.formattedExpected.match(/\n/g) || !props.formattedReceived.match(/\n/g)) {
+        //    return (
+        //        <p class="removal">
+        //            One or both of the inputs resulted in a formatted output containing no newlines.
+        //            This likely means that one (or both) are not in the correct format, and as such,
+        //            a diff will not be attempted. Diffing content of different formats or the wrong
+        //            format is rather expensive, so it is avoided.
+        //        </p>
+        //    );
+        //}
 
         // prettier-ignore
         const diffMethod =
             Math.max(
-                props.formattedExpected.match(/\n/g).length,
-                props.formattedReceived.match(/\n/g).length
+                props.formattedExpected.match(/\n/g)?.length,
+                props.formattedReceived.match(/\n/g)?.length
             ) > 300
                 ? diffLines
                 : diffWords;
