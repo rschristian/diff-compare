@@ -14,8 +14,8 @@ export function App() {
     const [received, setReceived] = useLocalStorage('received', '');
     const [contentFormat, setContentFormat] = useLocalStorage<ContentFormat>('contentFormat', 'HTML');
 
-    const formattedExpected = useFormatted(expected, contentFormat);
-    const formattedReceived = useFormatted(received, contentFormat);
+    const expectedFormatted = useFormatted(expected, contentFormat);
+    const receivedFormatted = useFormatted(received, contentFormat);
 
     return (
         <Root>
@@ -39,7 +39,7 @@ export function App() {
                     </h1>
                     <p class="mb-12 text(xl center lg:left)">Compare plaintext, HTML, CSS, JS and JSON strings</p>
                     <section class="flex justify-center mb-16">
-                        <DiffBox formattedExpected={formattedExpected} formattedReceived={formattedReceived} />
+                        <DiffBox expectedFormatted={expectedFormatted} receivedFormatted={receivedFormatted} />
                     </section>
                 </section>
                 <section class="flex(& col lg:row) gap-4">

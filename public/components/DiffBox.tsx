@@ -1,6 +1,8 @@
 import type { VNode } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 
+import { workerHelper } from '../workers/worker-helper.js';
+
 interface Part {
     added?: boolean;
     removed?: boolean;
@@ -8,8 +10,8 @@ interface Part {
 };
 
 interface Props {
-    formattedExpected: string;
-    formattedReceived: string;
+    expectedFormatted: string;
+    receivedFormatted: string;
 };
 
 export function DiffBox(props: Props) {
@@ -17,16 +19,11 @@ export function DiffBox(props: Props) {
 
     useEffect(() => {
         let inProgress = true;
-        if (!props.formattedExpected || !props.formattedReceived) return setDiff(null);
-        diffContent();
-
-        return () => { inProgress = false };
-
-        async function diffContent() {
-            const diffWorker = new Worker(new URL('../workers/diff.worker.js', import.meta.url));
-            diffWorker.postMessage({ expectedFormatted: props.formattedExpected, receivedFormatted: props.formattedReceived });
-            diffWorker.addEventListener('message', ({ data }) => {
-                console.log(inProgress);
+        if (!props.expectedFormatted || !props.receivedFormatted) return setDiff(null);
+        workerHelper({
+            url: new URL('../workers/diff.worker.js', import.meta.url),
+            workerData: { ...props },
+            cb: (data) => {
                 if (!inProgress) return;
                 setDiff(
                     data.map((part: Part) => (
@@ -35,10 +32,10 @@ export function DiffBox(props: Props) {
                         </span>
                     ))
                 );
-            });
-            return () => diffWorker.terminate();
-        }
-    }, [props.formattedExpected, props.formattedReceived]);
+            }
+        });
+        return () => { inProgress = false };
+    }, [props.expectedFormatted, props.receivedFormatted]);
 
     return (
         <pre
