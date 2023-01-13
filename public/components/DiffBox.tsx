@@ -1,5 +1,5 @@
-import { useMemo } from 'preact/hooks';
-import { diffWords, diffLines } from 'diff';
+import type { VNode } from 'preact';
+import { useEffect, useState } from 'preact/hooks';
 
 interface Part {
     added?: boolean;
@@ -13,33 +13,31 @@ interface Props {
 };
 
 export function DiffBox(props: Props) {
-    const diff = useMemo(() => {
-        if (!props.formattedExpected || !props.formattedReceived) return null;
-        //if (!props.formattedExpected.match(/\n/g) || !props.formattedReceived.match(/\n/g)) {
-        //    return (
-        //        <p class="removal">
-        //            One or both of the inputs resulted in a formatted output containing no newlines.
-        //            This likely means that one (or both) are not in the correct format, and as such,
-        //            a diff will not be attempted. Diffing content of different formats or the wrong
-        //            format is rather expensive, so it is avoided.
-        //        </p>
-        //    );
-        //}
+    const [diff, setDiff] = useState<VNode | VNode[] | null>(null);
 
-        // prettier-ignore
-        const diffMethod =
-            Math.max(
-                props.formattedExpected.match(/\n/g)?.length,
-                props.formattedReceived.match(/\n/g)?.length
-            ) > 300
-                ? diffLines
-                : diffWords;
+    useEffect(() => {
+        let inProgress = true;
+        if (!props.formattedExpected || !props.formattedReceived) return setDiff(null);
+        diffContent();
 
-        return diffMethod(props.formattedExpected, props.formattedReceived).map((part: Part) => (
-            <span class={`${part.added ? 'diff addition' : part.removed ? 'diff removal' : ''}`}>
-                {part.value}
-            </span>
-        ));
+        return () => { inProgress = false };
+
+        async function diffContent() {
+            const diffWorker = new Worker(new URL('../workers/diff.worker.js', import.meta.url));
+            diffWorker.postMessage({ expectedFormatted: props.formattedExpected, receivedFormatted: props.formattedReceived });
+            diffWorker.addEventListener('message', ({ data }) => {
+                console.log(inProgress);
+                if (!inProgress) return;
+                setDiff(
+                    data.map((part: Part) => (
+                        <span class={`${part.added ? 'diff addition' : part.removed ? 'diff removal' : ''}`}>
+                            {part.value}
+                        </span>
+                    ))
+                );
+            });
+            return () => diffWorker.terminate();
+        }
     }, [props.formattedExpected, props.formattedReceived]);
 
     return (

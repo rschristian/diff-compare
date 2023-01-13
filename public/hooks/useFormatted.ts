@@ -11,7 +11,7 @@ export function useFormatted(raw: string, contentFormat: ContentFormat) {
         return () => { inProgress = false };
 
         async function format() {
-            const formatWorker = new Worker(new URL('../utils/format.worker.js', import.meta.url))
+            const formatWorker = new Worker(new URL('../workers/format.worker.js', import.meta.url));
             formatWorker.postMessage({ input: raw, contentFormat });
             formatWorker.addEventListener('message', (e: { data: string }) => {
                 if (!inProgress) return;
