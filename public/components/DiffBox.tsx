@@ -39,7 +39,7 @@ export function DiffBox(props: Props) {
 
     return (
         <pre
-            class={`min-h-64 max-h-96 w-full p-2 bg-code(& dark:dark) overflow-auto rounded shadow-md ${
+            class={`h-96 w-full p-2 bg-code(& dark:dark) overflow-auto rounded shadow-md ${
                 !Array.isArray(diff) ? 'whitespace-normal' : ''
             }`}
         >
