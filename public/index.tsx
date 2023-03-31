@@ -1,22 +1,26 @@
 import { withTwind } from '@rschristian/twind-wmr';
+import { signal } from '@preact/signals';
 
 import { Root, Header, Main, Footer } from '@rschristian/intrepid-design';
 
 import { PasteBox } from './components/PasteBox.js';
 import { DiffBox } from './components/DiffBox.js';
-import { useLocalStorage } from './hooks/useLocalStorage.js';
-import { useFormatted } from './hooks/useFormatted.js';
+import { initFromLocalStorage } from './utils/local-storage.js';
+import { formatted } from './utils/formatted.js';
+import { diffed } from './utils/diffed.js';
 
 export type ContentFormat = 'PlainText' | 'HTML' | 'CSS' | 'JS';
 
+const expected = signal('');
+const received = signal('');
+const contentFormat = signal<ContentFormat>('HTML');
+
+// Combine formatting & diffing into 1 big signal?
+const expectedFormatted = formatted(expected, contentFormat);
+const receivedFormatted = formatted(received, contentFormat);
+const diffedParts = diffed(expectedFormatted, receivedFormatted);
+
 export function App() {
-    const [expected, setExpected] = useLocalStorage('expected', '');
-    const [received, setReceived] = useLocalStorage('received', '');
-    const [contentFormat, setContentFormat] = useLocalStorage<ContentFormat>('contentFormat', 'HTML');
-
-    const expectedFormatted = useFormatted(expected, contentFormat);
-    const receivedFormatted = useFormatted(received, contentFormat);
-
     return (
         <Root>
             <Header RSC={{ href: 'https://github.com/rschristian', label: 'My GitHub Account' }}>
@@ -37,20 +41,16 @@ export function App() {
                     <h1 class="mb-2 text(primary(dark dark:light) 5xl center lg:left)">
                         Diff & Compare
                     </h1>
-                    <p class="mb-12 text(xl center lg:left)">Compare plaintext, HTML, CSS, JS and JSON strings</p>
+                    <p class="mb-12 text(xl center lg:left)">
+                        Compare plaintext, HTML, CSS, JS and JSON strings
+                    </p>
                     <section class="flex justify-center mb-16">
-                        <DiffBox expectedFormatted={expectedFormatted} receivedFormatted={receivedFormatted} />
+                        <DiffBox diffedParts={diffedParts} />
                     </section>
                 </section>
                 <section class="flex(& col lg:row) gap-4">
-                    <PasteBox
-                        label="Expected"
-                        content={expected}
-                        setContent={setExpected}
-                        contentFormat={contentFormat}
-                        setContentFormat={setContentFormat}
-                    />
-                    <PasteBox label="Received" content={received} setContent={setReceived} />
+                    <PasteBox label="Expected" content={expected} contentFormat={contentFormat} />
+                    <PasteBox label="Received" content={received} />
                 </section>
             </Main>
             <Footer year={2022} />
@@ -64,5 +64,9 @@ const { hydrate, prerender } = withTwind(
 );
 
 hydrate(<App />);
+
+initFromLocalStorage(expected, 'expected');
+initFromLocalStorage(received, 'received');
+initFromLocalStorage(contentFormat, 'contentFormat');
 
 export { prerender };
