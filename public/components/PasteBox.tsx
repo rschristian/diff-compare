@@ -8,14 +8,14 @@ interface TabsProps {
 export function Tabs({ contentFormat }: TabsProps) {
     return (
         <>
-            {['Plaintext', 'HTML', 'CSS', 'JS'].map((content: ContentFormat) => (
+            {['Plaintext', 'HTML', 'CSS', 'JS'].map((label: ContentFormat) => (
                 <button
                     class={`min-w(10 lg:16) h-10 p-2 bg-${
-                        contentFormat.value === content ? 'primary-light' : 'primary-dark'
+                        contentFormat.value === label ? 'primary-light' : 'primary-dark'
                     } text-white rounded-t-lg border(& 1 code dark:code-dark)`}
-                    onClick={() => (contentFormat.value = content)}
+                    onClick={() => (contentFormat.value = label)}
                 >
-                    {content}
+                    {label}
                 </button>
             ))}
         </>
