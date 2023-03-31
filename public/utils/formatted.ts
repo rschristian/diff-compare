@@ -9,11 +9,9 @@ export function formatted(
     contentFormatSignal: ReadonlySignal<ContentFormat>,
 ) {
     return asyncComputed(async () => {
-        const input = inputSignal.value;
-        const contentFormat = contentFormatSignal.value;
         return await workerHelper({
             url: new URL('../workers/format.worker.js', import.meta.url),
-            workerData: { input, contentFormat },
+            workerData: { input: inputSignal.value, contentFormat: contentFormatSignal.value },
         });
     });
 }

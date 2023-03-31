@@ -13,8 +13,13 @@ export function diffed(
     receivedFormatted: AsyncComputedSignalPayload<string>,
 ) {
     return asyncComputed<DiffPart[]>(async () => {
-        if (expectedFormatted.pending.value || receivedFormatted.pending.value) return [];
-        if (!expectedFormatted.value || !receivedFormatted.value) return [];
+        if (
+            expectedFormatted.pending.value ||
+            receivedFormatted.pending.value ||
+            !expectedFormatted.value ||
+            !receivedFormatted.value
+        )
+            return [];
         return await workerHelper({
             url: new URL('../workers/diff.worker.js', import.meta.url),
             workerData: {
