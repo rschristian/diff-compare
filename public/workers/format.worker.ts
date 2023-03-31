@@ -1,4 +1,5 @@
 import { beautifyHtml, beautifyJs, beautifyCss } from '@rschristian/js-beautify';
+
 import type { ContentFormat } from '../index.js';
 
 function format(input: string, contentFormat: ContentFormat): string {

@@ -2,7 +2,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "serve:dev": "wmr -p 3000",
     "serve:prod": "wmr serve -p 3000",
     "build": "wmr build --prerender && node scripts/post-build.js",
     "format": "prettier --write --ignore-path .gitignore ."

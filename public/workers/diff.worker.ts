@@ -2,6 +2,7 @@ import { diffWords, diffLines } from 'diff';
 
 function diffInputs(expectedFormatted: string, receivedFormatted: string) {
     const diffMethod =
+        // prettier-ignore
         Math.max(
             expectedFormatted.match(/\n/g)?.length,
             receivedFormatted.match(/\n/g)?.length
@@ -14,4 +15,4 @@ function diffInputs(expectedFormatted: string, receivedFormatted: string) {
 
 addEventListener('message', ({ data }) => {
     postMessage(diffInputs(data.expectedFormatted, data.receivedFormatted));
-})
+});
