@@ -25,7 +25,7 @@ This has saved me a ton of time already, hopefully it can be useful for someone 
 
 Simply navigate to [https://diff-compare.rschristian.dev/](https://diff-compare.rschristian.dev/) and enter expected text in the left field and recieved in the right. You can set file type with the tabs above the expected input field.
 
-Both entries are stored in localStorage so feel free to refersh the page or navigate away. Your entries will remain.
+Both entries are stored in localStorage so feel free to refresh the page or navigate away. Your entries will remain.
 
 Any backslash found in either string will be removed. This was essential for me due to Jest/the matchers returning strings with escapes that were never relevant.
 
