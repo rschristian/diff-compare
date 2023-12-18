@@ -6,6 +6,7 @@ interface Props {
 }
 
 export function DiffBox({ diffedParts }: Props) {
+    // prettier-ignore
     return (
         diffedParts.pending.value
             ? <div class="h-96"><span class="loader"></span></div>
