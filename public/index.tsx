@@ -65,8 +65,8 @@ const { hydrate, prerender } = withTwind(
 
 hydrate(<App />);
 
+initFromLocalStorage(contentFormat, 'contentFormat');
 initFromLocalStorage(expected, 'expected');
 initFromLocalStorage(received, 'received');
-initFromLocalStorage(contentFormat, 'contentFormat');
 
 export { prerender };
