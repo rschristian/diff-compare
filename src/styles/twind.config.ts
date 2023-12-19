@@ -5,7 +5,7 @@ export const twindConfig = defineConfig({
     darkMode: 'class',
     presets: [presetTailwind()],
     hash: false,
-    ignorelist: ['dark', 'diff', 'removal', 'addition'],
+    ignorelist: ['dark', 'diff', 'removal', 'addition', 'loader'],
     theme: {
         colors: {
             primary: {

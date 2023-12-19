@@ -1,6 +1,7 @@
 import type { AsyncComputedSignalPayload } from './async-computed.js';
 import { asyncComputed } from './async-computed.js';
 import { workerHelper } from '../workers/worker-helper.js';
+import diffWorkerUrl from '../workers/diff.worker?worker&url';
 
 export interface DiffPart {
     added?: boolean;
@@ -21,7 +22,7 @@ export function diffed(
         )
             return [];
         return await workerHelper({
-            url: new URL('../workers/diff.worker.js', import.meta.url),
+            url: diffWorkerUrl,
             workerData: {
                 expectedFormatted: expectedFormatted.value,
                 receivedFormatted: receivedFormatted.value,

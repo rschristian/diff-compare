@@ -4,7 +4,7 @@ interface WorkerHelper {
 }
 
 export async function workerHelper({ url, workerData }: WorkerHelper) {
-    const worker = new Worker(url);
+    const worker = new Worker(url, { type: 'module' });
     worker.postMessage(workerData);
     // @ts-ignore
     const { data } = await new Promise((r) =>
