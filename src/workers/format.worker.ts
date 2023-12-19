@@ -1,6 +1,6 @@
 import { beautifyHtml, beautifyJs, beautifyCss } from '@rschristian/js-beautify';
 
-import type { ContentFormat } from '../index.js';
+import type { ContentFormat } from '../model.js';
 
 function format(input: string, contentFormat: ContentFormat): string {
     input = input.replace(/\\/g, '');

@@ -1,6 +1,6 @@
 import type { ReadonlySignal } from '@preact/signals';
 
-import type { ContentFormat } from '../index.js';
+import type { ContentFormat } from '../model.js';
 import { asyncComputed } from './async-computed.js';
 import { workerHelper } from '../workers/worker-helper.js';
 import formatWorkerUrl from '../workers/format.worker.js?worker&url';

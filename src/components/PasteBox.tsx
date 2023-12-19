@@ -1,4 +1,4 @@
-import type { ContentFormat } from '../index.js';
+import type { ContentFormat } from '../model.js';
 import { Signal } from '@preact/signals';
 
 interface TabsProps {

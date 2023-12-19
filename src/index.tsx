@@ -1,24 +1,12 @@
 import { withTwind } from '@rschristian/twind-wmr';
-import { signal } from '@preact/signals';
 
 import { Root, Header, Main, Footer } from '@rschristian/intrepid-design';
 
 import { PasteBox } from './components/PasteBox.js';
 import { DiffBox } from './components/DiffBox.js';
-import { initFromLocalStorage } from './utils/local-storage.js';
-import { formatted } from './utils/formatted.js';
-import { diffed } from './utils/diffed.js';
+import { Model } from './model.js';
 
-export type ContentFormat = 'PlainText' | 'HTML' | 'CSS' | 'JS';
-
-const expected = signal('');
-const received = signal('');
-const contentFormat = signal<ContentFormat>('HTML');
-
-// Combine formatting & diffing into 1 big signal?
-const expectedFormatted = formatted(expected, contentFormat);
-const receivedFormatted = formatted(received, contentFormat);
-const diffedParts = diffed(expectedFormatted, receivedFormatted);
+const model = new Model();
 
 export function App() {
     return (
@@ -45,12 +33,12 @@ export function App() {
                         Compare plaintext, HTML, CSS, JS and JSON strings
                     </p>
                     <section class="flex justify-center mb-16">
-                        <DiffBox diffedParts={diffedParts} />
+                        <DiffBox diffedParts={model.diffedParts} />
                     </section>
                 </section>
                 <section class="flex(& col lg:row) gap-4">
-                    <PasteBox label="Expected" content={expected} contentFormat={contentFormat} />
-                    <PasteBox label="Received" content={received} />
+                    <PasteBox label="Expected" content={model.expected} contentFormat={model.contentFormat} />
+                    <PasteBox label="Received" content={model.received} />
                 </section>
             </Main>
             <Footer year={2022} />
@@ -65,8 +53,6 @@ const { hydrate, prerender } = withTwind(
 
 hydrate(<App />);
 
-initFromLocalStorage(contentFormat, 'contentFormat');
-initFromLocalStorage(expected, 'expected');
-initFromLocalStorage(received, 'received');
+model.initFromLocalStorage();
 
 export { prerender };

@@ -23,17 +23,17 @@ export function DiffBox({ diffedParts }: Props) {
     return (
         <pre class={`
             ${diffedParts.pending.value
-                ? 'flex items-center justify-center'
+                ? 'flex'
                 : diffedParts.value.length === 1
                     ? '!h-auto !w-auto !bg-primary-dark'
                     : ''}
-            h-96 w-full bg-code(& dark:dark) p-2 overflow-y-auto rounded shadow-md
+            items-center justify-center h-96 w-full bg-code(& dark:dark) p-2 overflow-y-auto rounded shadow-md
         `}>
             {
                 diffedParts.pending.value
                     ? <DelayedLoader />
                     : diffedParts.value.length === 1
-                        ? <span class="bg-primary-dark">The two inputs are identical</span>
+                        ? <span class="bg-primary-dark">The two inputs are identical!</span>
                         : diffedParts.value.map((part) => (
                             <span
                                 class={`${
