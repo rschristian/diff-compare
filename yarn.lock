@@ -621,10 +621,10 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
-"@rschristian/intrepid-design@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@rschristian/intrepid-design/-/intrepid-design-0.1.2.tgz#5cba598b41832d1119bcb855b352e3719dfc87d8"
-  integrity sha512-ovK0xVhk/p/QUnjAOn+tkL3k6U1cwAH9kyTJnCH6OV8AMFrG3prkiWbrs5QD8+k2/cNqudtKOmvlZ60wpJAoxA==
+"@rschristian/intrepid-design@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@rschristian/intrepid-design/-/intrepid-design-0.1.4.tgz#1115d77cf2e1cf5c71367c96073b00442723f947"
+  integrity sha512-k9Ih0oRu4q4SQ3dDssosqqsrMUCcJbV5VVHlGZLf59GDRBbox/aveXnBg4lmGkG6wWJ1H6LkH2+KiyX9kS8jqg==
 
 "@rschristian/js-beautify@^1.14.0":
   version "1.14.0"
