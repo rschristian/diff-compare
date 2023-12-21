@@ -1,5 +1,6 @@
-import type { ContentFormat } from '../model.js';
-import { Signal } from '@preact/signals';
+import type { Signal } from '@preact/signals';
+
+import type { ContentFormat } from '../Model.js';
 
 interface TabsProps {
     contentFormat?: Signal<ContentFormat>;
@@ -11,8 +12,10 @@ export function Tabs({ contentFormat }: TabsProps) {
             {['Plaintext', 'HTML', 'CSS', 'JS'].map((label: ContentFormat) => (
                 <button
                     class={`min-w(10 lg:16) h-10 p-2 bg-${
-                        contentFormat.value === label ? 'primary-light' : 'primary-dark'
-                    } text-white rounded-t-lg border(& 1 code dark:code-dark)`}
+                        contentFormat.value === label
+                            ? 'primary-light text-[#222]'
+                            : 'primary-dark text-white'
+                    } rounded-t-lg mr(1 last:0)`}
                     onClick={() => (contentFormat.value = label)}
                 >
                     {label}

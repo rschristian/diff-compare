@@ -22,7 +22,6 @@
     "vite-plugin-tailwind-grouping": "^0.1.8"
   },
   "devDependencies": {
-    "@types/node": "^16.11.0",
     "prettier": "^2.8.1",
     "prettier-config-rschristian": "^0.1.1",
     "typescript": "^4.9.4"

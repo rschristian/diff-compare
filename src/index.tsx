@@ -1,10 +1,9 @@
 import { withTwind } from '@rschristian/twind-wmr';
-
 import { Root, Header, Main, Footer } from '@rschristian/intrepid-design';
 
 import { PasteBox } from './components/PasteBox.js';
 import { DiffBox } from './components/DiffBox.js';
-import { Model } from './model.js';
+import { Model } from './Model.js';
 
 const model = new Model();
 
@@ -37,7 +36,11 @@ export function App() {
                     </section>
                 </section>
                 <section class="flex(& col lg:row) gap-4">
-                    <PasteBox label="Expected" content={model.expected} contentFormat={model.contentFormat} />
+                    <PasteBox
+                        label="Expected"
+                        content={model.expected}
+                        contentFormat={model.contentFormat}
+                    />
                     <PasteBox label="Received" content={model.received} />
                 </section>
             </Main>
