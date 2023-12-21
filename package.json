@@ -12,7 +12,7 @@
     "@rschristian/intrepid-design": "^0.1.4",
     "@rschristian/js-beautify": "^1.14.0",
     "@rschristian/twind-wmr": "^0.3.0",
-    "@sovereignjs/core": "^0.1.0",
+    "@sovereignjs/core": "^0.1.1",
     "@twind/core": "^1.1.2",
     "@twind/preset-tailwind": "^1.1.2",
     "diff": "^5.1.0",
