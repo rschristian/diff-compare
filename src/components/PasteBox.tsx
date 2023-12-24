@@ -1,20 +1,15 @@
-import type { Signal } from '@preact/signals';
+import * as model from '../Model.js';
 
-import type { ContentFormat } from '../Model.js';
-
-interface TabsProps {
-    contentFormat?: Signal<ContentFormat>;
-}
-
-export function Tabs({ contentFormat }: TabsProps) {
+export function Tabs() {
+    const contentFormat = model.contentFormat;
     return (
         <>
-            {['Plaintext', 'HTML', 'CSS', 'JS'].map((label: ContentFormat) => (
+            {['Plaintext', 'HTML', 'CSS', 'JS'].map((label: model.ContentFormat) => (
                 <button
-                    class={`min-w(10 lg:16) h-10 p-2 bg-${
+                    class={`min-w(10 lg:16) h-10 p-2 ${
                         contentFormat.value === label
-                            ? 'primary-light text-[#222]'
-                            : 'primary-dark text-white'
+                            ? 'bg-primary-light text-[#222]'
+                            : 'bg-primary-dark text-white'
                     } rounded-t-lg mr(1 last:0)`}
                     onClick={() => (contentFormat.value = label)}
                 >
@@ -27,22 +22,21 @@ export function Tabs({ contentFormat }: TabsProps) {
 
 interface PasteBoxProps {
     label: string;
-    content: Signal<string>;
-    contentFormat?: Signal<ContentFormat>;
 }
 
-export function PasteBox({ label, content, contentFormat }: PasteBoxProps) {
+export function PasteBox({ label }: PasteBoxProps) {
+    const content = model[label.toLowerCase()];
+
     return (
         <div class="flex(& col) mb-8 lg:(w-1/2 mb-0) text-center">
             <label for={label} class="mb-4 text(primary(dark dark:light) 2xl) font-semibold">
                 {label}
             </label>
             <div class="flex(& row)">
-                {contentFormat ? (
-                    <Tabs contentFormat={contentFormat} />
-                ) : (
-                    <div class="hidden lg:block mt-10" />
-                )}
+                {label === 'Expected'
+                    ? <Tabs />
+                    : <div class="hidden lg:block h-10" />
+                }
             </div>
             <textarea
                 id={label}

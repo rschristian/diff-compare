@@ -3,9 +3,7 @@ import { Root, Header, Main, Footer } from '@rschristian/intrepid-design';
 
 import { PasteBox } from './components/PasteBox.js';
 import { DiffBox } from './components/DiffBox.js';
-import { Model } from './Model.js';
-
-const model = new Model();
+import { init } from './Model.js';
 
 export function App() {
     return (
@@ -32,16 +30,12 @@ export function App() {
                         Compare plaintext, HTML, CSS, JS and JSON strings
                     </p>
                     <section class="flex justify-center mb-16">
-                        <DiffBox diffedParts={model.diffedParts} />
+                        <DiffBox />
                     </section>
                 </section>
                 <section class="flex(& col lg:row) gap-4">
-                    <PasteBox
-                        label="Expected"
-                        content={model.expected}
-                        contentFormat={model.contentFormat}
-                    />
-                    <PasteBox label="Received" content={model.received} />
+                    <PasteBox label="Expected" />
+                    <PasteBox label="Received" />
                 </section>
             </Main>
             <Footer year={2022} />
@@ -56,6 +50,6 @@ const { hydrate, prerender } = withTwind(
 
 hydrate(<App />);
 
-model.initFromLocalStorage();
+init();
 
 export { prerender };

@@ -1,58 +1,25 @@
-import { batch, signal, computed, effect, Signal } from '@preact/signals';
-import { beautifyHtml, beautifyJs, beautifyCss } from '@rschristian/js-beautify';
-import { diffWords, diffLines } from 'diff';
+import { batch, signal, effect, Signal } from '@preact/signals';
+
+import { formatted } from './utils/formatted.js';
+import { diffed } from './utils/diffed.js';
 
 export type ContentFormat = 'PlainText' | 'HTML' | 'CSS' | 'JS';
 
-export class Model {
-    expected = signal('');
-    received = signal('');
-    contentFormat = signal<ContentFormat>('HTML');
+export const expected = signal('');
+export const received = signal('');
+export const contentFormat = signal<ContentFormat>('HTML');
 
-    expectedFormatted = computed(() => format(this.expected.value, this.contentFormat.value));
-    receivedFormatted = computed(() => format(this.received.value, this.contentFormat.value));
+export const diffedParts = diffed(
+    formatted(expected, contentFormat),
+    formatted(received, contentFormat)
+);
 
-    diffedParts = computed(() =>
-        diffInputs(this.expectedFormatted.value, this.receivedFormatted.value),
-    );
-
-    initFromLocalStorage() {
-        batch(() => {
-            initFromLocalStorage(this.expected, 'expected');
-            initFromLocalStorage(this.received, 'received');
-            initFromLocalStorage(this.contentFormat, 'contentFormat');
-        });
-    }
-}
-
-function format(input: string, contentFormat: ContentFormat): string {
-    input = input.replace(/\\/g, '');
-    switch (contentFormat) {
-        case 'HTML':
-            return beautifyHtml(input, { extra_liners: [], indent_inner_html: true });
-        case 'CSS':
-            return beautifyCss(input);
-        case 'JS':
-            return beautifyJs(input);
-        default:
-            return input;
-    }
-}
-
-export interface DiffPart {
-    added?: boolean;
-    removed?: boolean;
-    value: string;
-}
-
-function diffInputs(expectedFormatted: string, receivedFormatted: string): DiffPart[] {
-    const diffMethod =
-        Math.max(expectedFormatted.match(/\n/g)?.length, receivedFormatted.match(/\n/g)?.length) >
-        300
-            ? diffLines
-            : diffWords;
-
-    return diffMethod(expectedFormatted, receivedFormatted);
+export function init() {
+    batch(() => {
+        initFromLocalStorage(expected, 'expected');
+        initFromLocalStorage(received, 'received');
+        initFromLocalStorage(contentFormat, 'contentFormat');
+    });
 }
 
 function initFromLocalStorage(signal: Signal, key: string): void {
