@@ -14,6 +14,7 @@ export function diffed(
     receivedFormatted: AsyncComputedSignalPayload<string>,
 ) {
     return asyncComputed<DiffPart[]>(async () => {
+        if (typeof window === 'undefined') return []
         while (!expectedFormatted.value || !receivedFormatted.value) {
             await new Promise((r) => setTimeout(r, 5));
         }
