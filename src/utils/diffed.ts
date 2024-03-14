@@ -15,7 +15,13 @@ export function diffed(
 ) {
     return asyncComputed<DiffPart[]>(async () => {
         if (typeof window === 'undefined') return [];
-        if (expectedFormatted.pending.value || !expectedFormatted.value || receivedFormatted.pending.value || !receivedFormatted.value) return [];
+        if (
+            expectedFormatted.pending.value ||
+            !expectedFormatted.value ||
+            receivedFormatted.pending.value ||
+            !receivedFormatted.value
+        )
+            return [];
         return await workerHelper({
             url: diffWorkerUrl,
             workerData: {

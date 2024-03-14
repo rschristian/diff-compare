@@ -46,7 +46,7 @@ export function App() {
 const { hydrate, prerender } = withTwind(
     () => import('./styles/twind.config.js'),
     () => <App />,
-    true
+    true,
 );
 
 hydrate(<App />);

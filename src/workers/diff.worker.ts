@@ -36,23 +36,34 @@ function diffInputs(expectedFormatted: string, receivedFormatted: string) {
 }
 
 addEventListener('message', ({ data }) => {
-    const diff = diffInputs(data.expectedFormatted, data.receivedFormatted);
-
-    postMessage(
-        diff.map((segment: { value: string, added?: boolean, removed?: boolean }, i: number) => {
+    const diff = diffInputs(data.expectedFormatted, data.receivedFormatted).map(
+        (segment: { value: string; added?: boolean; removed?: boolean }, i: number) => {
             if (segment.added || segment.removed) return segment;
 
             if (i == 0) {
-                return { value: (newLineCount(segment.value) > 3 ? '...\n' : '') + lastThreeLines(segment.value) };
+                return {
+                    value:
+                        (newLineCount(segment.value) > 3 ? '...\n' : '') +
+                        lastThreeLines(segment.value),
+                };
             }
 
             if (i == diff.length - 1) {
-                return { value: firstThreeLines(segment.value) + (newLineCount(segment.value) > 3 ? '...' : '') };
+                return {
+                    value:
+                        firstThreeLines(segment.value) +
+                        (newLineCount(segment.value) > 3 ? '...' : ''),
+                };
             }
 
-            return { value: newLineCount(segment.value) > 6
-                ? firstThreeLines(segment.value) + '...\n' + lastThreeLines(segment.value)
-                : segment.value };
-        })
+            return {
+                value:
+                    newLineCount(segment.value) > 6
+                        ? firstThreeLines(segment.value) + '...\n' + lastThreeLines(segment.value)
+                        : segment.value,
+            };
+        },
     );
+
+    postMessage(diff);
 });

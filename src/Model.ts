@@ -11,7 +11,7 @@ export const contentFormat = signal<ContentFormat>('HTML');
 
 export const diffedParts = diffed(
     formatted(expected, contentFormat),
-    formatted(received, contentFormat)
+    formatted(received, contentFormat),
 );
 
 export function init() {
