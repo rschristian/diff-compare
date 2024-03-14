@@ -36,8 +36,10 @@ function diffInputs(expectedFormatted: string, receivedFormatted: string) {
 }
 
 addEventListener('message', ({ data }) => {
-    const diff = diffInputs(data.expectedFormatted, data.receivedFormatted).map(
-        (segment: { value: string; added?: boolean; removed?: boolean }, i: number) => {
+    const diff = diffInputs(data.expectedFormatted, data.receivedFormatted);
+
+    postMessage(
+        diff.map((segment: { value: string; added?: boolean; removed?: boolean }, i: number) => {
             if (segment.added || segment.removed) return segment;
 
             if (i == 0) {
@@ -62,8 +64,6 @@ addEventListener('message', ({ data }) => {
                         ? firstThreeLines(segment.value) + '...\n' + lastThreeLines(segment.value)
                         : segment.value,
             };
-        },
+        }),
     );
-
-    postMessage(diff);
 });
