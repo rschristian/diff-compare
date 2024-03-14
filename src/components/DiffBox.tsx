@@ -2,10 +2,12 @@ import { computed } from '@preact/signals';
 
 import { diffedParts } from '../Model.js';
 
+// Kinda wonky, but done to reduce shifting while diffing. The loading spinner is inserted
+// into the center of the existing container, be that the diff box or message that the inputs
+// are identical.
 let previous = '';
 const wrapperClasses = computed(() => {
     if (diffedParts.pending.value) {
-        // Centers the loading spinner
         return (previous += ' flex justify-center items-center');
     }
     return diffedParts.value.length === 1
