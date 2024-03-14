@@ -14,10 +14,8 @@ export function diffed(
     receivedFormatted: AsyncComputedSignalPayload<string>,
 ) {
     return asyncComputed<DiffPart[]>(async () => {
-        if (typeof window === 'undefined') return []
-        while (!expectedFormatted.value || !receivedFormatted.value) {
-            await new Promise((r) => setTimeout(r, 5));
-        }
+        if (typeof window === 'undefined') return [];
+        if (expectedFormatted.pending.value || !expectedFormatted.value || receivedFormatted.pending.value || !receivedFormatted.value) return [];
         return await workerHelper({
             url: diffWorkerUrl,
             workerData: {
