@@ -42,9 +42,10 @@ export function PasteBox({ label }: PasteBoxProps) {
                 id={label}
                 class="min-h-64 w-full p-2 bg-code(& dark:dark) rounded focus:(ring(& primary-light) outline-none) shadow-md"
                 placeholder={label}
-                value={content.value}
                 onInput={(e) => (content.value = (e.target as HTMLTextAreaElement).value)}
-            />
+            >
+                {content.value}
+            </textarea>
         </div>
     );
 }
