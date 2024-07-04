@@ -8,17 +8,18 @@
     "format": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
-    "@preact/signals": "^1.1.3",
+    "@babel/core": "^7.24.7",
+    "@preact/signals": "^1.2.3",
     "@rschristian/intrepid-design": "^0.1.4",
     "@rschristian/js-beautify": "^1.14.0",
-    "@rschristian/twind-wmr": "^0.3.0",
-    "@sovereignjs/core": "^0.1.1",
+    "@rschristian/twind-preact-iso": "^0.4.0",
+    "@sovereignjs/core": "^0.1.4",
     "@twind/core": "^1.1.2",
     "@twind/preset-tailwind": "^1.1.2",
-    "diff": "^5.1.0",
-    "preact": "^10.11.3",
-    "preact-iso": "^2.3.1",
-    "preact-render-to-string": "^5.2.6"
+    "diff": "^5.2.0",
+    "preact": "^10.22.1",
+    "preact-iso": "^2.6.3",
+    "preact-render-to-string": "^6.5.5"
   },
   "devDependencies": {
     "prettier": "^2.8.1",
