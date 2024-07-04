@@ -1,11 +1,16 @@
-import { withTwind } from '@rschristian/twind-wmr';
+import { withTwind } from '@rschristian/twind-preact-iso';
 import { Root, Header, Main, Footer } from '@rschristian/intrepid-design';
+import { useEffect } from 'preact/hooks';
 
 import { PasteBox } from './components/PasteBox.js';
 import { DiffBox } from './components/DiffBox.js';
 import { init } from './Model.js';
 
 export function App() {
+    useEffect(() => {
+        init();
+    }, []);
+
     return (
         <Root>
             <Header RSC={{ href: 'https://github.com/rschristian', label: 'My GitHub Account' }}>
@@ -50,7 +55,5 @@ const { hydrate, prerender } = withTwind(
 );
 
 hydrate(<App />);
-
-init();
 
 export { prerender };
