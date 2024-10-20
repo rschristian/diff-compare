@@ -1,17 +1,16 @@
 import * as model from '../Model.js';
 
-export function Tabs() {
-    const contentFormat = model.contentFormat;
+function Tabs() {
     return (
         <>
             {['Plaintext', 'HTML', 'CSS', 'JS'].map((label: model.ContentFormat) => (
                 <button
                     class={`min-w(10 lg:16) h-10 p-2 ${
-                        contentFormat.value === label
+                        model.contentFormat.value === label
                             ? 'bg-primary-light text-[#222]'
                             : 'bg-primary-dark text-white'
                     } rounded-t-lg mr(1 last:0)`}
-                    onClick={() => (contentFormat.value = label)}
+                    onClick={() => (model.contentFormat.value = label)}
                 >
                     {label}
                 </button>
